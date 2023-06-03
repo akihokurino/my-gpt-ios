@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02219A792A27253A0068425D /* MyGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A782A27253A0068425D /* MyGPTApp.swift */; };
+		02219A7B2A27253A0068425D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A7A2A27253A0068425D /* ContentView.swift */; };
+		02219A7D2A27253C0068425D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02219A7C2A27253C0068425D /* Assets.xcassets */; };
+		02219A802A27253C0068425D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02219A7F2A27253C0068425D /* Preview Assets.xcassets */; };
+		02219A882A2727D40068425D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 02219A872A2727D40068425D /* Alamofire */; };
+		02219A8D2A272B980068425D /* OpenAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A8C2A272B980068425D /* OpenAI.swift */; };
+		02219A8F2A272BDF0068425D /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A8E2A272BDF0068425D /* Env.swift */; };
+		02219A912A272CFD0068425D /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 02219A902A272CFD0068425D /* Config.xcconfig */; };
+		02219A942A272E1B0068425D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A932A272E1B0068425D /* Error.swift */; };
+		02219A962A272F4A0068425D /* ChatCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02219A952A272F4A0068425D /* ChatCreate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02219A752A27253A0068425D /* MyGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02219A782A27253A0068425D /* MyGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGPTApp.swift; sourceTree = "<group>"; };
+		02219A7A2A27253A0068425D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		02219A7C2A27253C0068425D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		02219A7F2A27253C0068425D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		02219A8C2A272B980068425D /* OpenAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI.swift; sourceTree = "<group>"; };
+		02219A8E2A272BDF0068425D /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		02219A902A272CFD0068425D /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		02219A922A272D540068425D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		02219A932A272E1B0068425D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		02219A952A272F4A0068425D /* ChatCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02219A722A27253A0068425D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02219A882A2727D40068425D /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02219A6C2A27253A0068425D = {
+			isa = PBXGroup;
+			children = (
+				02219A772A27253A0068425D /* MyGPT */,
+				02219A762A27253A0068425D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		02219A762A27253A0068425D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02219A752A27253A0068425D /* MyGPT.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02219A772A27253A0068425D /* MyGPT */ = {
+			isa = PBXGroup;
+			children = (
+				02219A8B2A272B810068425D /* OpenAI */,
+				02219A782A27253A0068425D /* MyGPTApp.swift */,
+				02219A7A2A27253A0068425D /* ContentView.swift */,
+				02219A932A272E1B0068425D /* Error.swift */,
+				02219A8E2A272BDF0068425D /* Env.swift */,
+				02219A7C2A27253C0068425D /* Assets.xcassets */,
+				02219A922A272D540068425D /* Info.plist */,
+				02219A902A272CFD0068425D /* Config.xcconfig */,
+				02219A7E2A27253C0068425D /* Preview Content */,
+			);
+			path = MyGPT;
+			sourceTree = "<group>";
+		};
+		02219A7E2A27253C0068425D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				02219A7F2A27253C0068425D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		02219A8B2A272B810068425D /* OpenAI */ = {
+			isa = PBXGroup;
+			children = (
+				02219A8C2A272B980068425D /* OpenAI.swift */,
+				02219A952A272F4A0068425D /* ChatCreate.swift */,
+			);
+			path = OpenAI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02219A742A27253A0068425D /* MyGPT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02219A832A27253C0068425D /* Build configuration list for PBXNativeTarget "MyGPT" */;
+			buildPhases = (
+				02219A712A27253A0068425D /* Sources */,
+				02219A722A27253A0068425D /* Frameworks */,
+				02219A732A27253A0068425D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyGPT;
+			packageProductDependencies = (
+				02219A872A2727D40068425D /* Alamofire */,
+			);
+			productName = MyGPT;
+			productReference = 02219A752A27253A0068425D /* MyGPT.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		02219A6D2A27253A0068425D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					02219A742A27253A0068425D = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 02219A702A27253A0068425D /* Build configuration list for PBXProject "MyGPT" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 02219A6C2A27253A0068425D;
+			packageReferences = (
+				02219A862A2727D40068425D /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
+			productRefGroup = 02219A762A27253A0068425D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02219A742A27253A0068425D /* MyGPT */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02219A732A27253A0068425D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02219A802A27253C0068425D /* Preview Assets.xcassets in Resources */,
+				02219A912A272CFD0068425D /* Config.xcconfig in Resources */,
+				02219A7D2A27253C0068425D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02219A712A27253A0068425D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02219A8D2A272B980068425D /* OpenAI.swift in Sources */,
+				02219A962A272F4A0068425D /* ChatCreate.swift in Sources */,
+				02219A8F2A272BDF0068425D /* Env.swift in Sources */,
+				02219A7B2A27253A0068425D /* ContentView.swift in Sources */,
+				02219A942A272E1B0068425D /* Error.swift in Sources */,
+				02219A792A27253A0068425D /* MyGPTApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		02219A812A27253C0068425D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02219A902A272CFD0068425D /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		02219A822A27253C0068425D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02219A902A272CFD0068425D /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		02219A842A27253C0068425D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MyGPT/Preview Content\"";
+				DEVELOPMENT_TEAM = 39KF2M8S75;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGPT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyGPT;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.akiho.my-gpt";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		02219A852A27253C0068425D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MyGPT/Preview Content\"";
+				DEVELOPMENT_TEAM = 39KF2M8S75;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGPT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyGPT;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.akiho.my-gpt";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02219A702A27253A0068425D /* Build configuration list for PBXProject "MyGPT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02219A812A27253C0068425D /* Debug */,
+				02219A822A27253C0068425D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02219A832A27253C0068425D /* Build configuration list for PBXNativeTarget "MyGPT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02219A842A27253C0068425D /* Debug */,
+				02219A852A27253C0068425D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02219A862A2727D40068425D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02219A872A2727D40068425D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02219A862A2727D40068425D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 02219A6D2A27253A0068425D /* Project object */;
+}

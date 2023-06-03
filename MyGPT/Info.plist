@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OpenAI ApiKey</key>
+	<string>$(OPENAI_API_KEY)</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your description of why you want to use speech recognition goes here.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your description of why you want to use the microphone goes here.</string>
+</dict>
+</plist>
