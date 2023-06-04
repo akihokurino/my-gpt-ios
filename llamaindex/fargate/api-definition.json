@@ -23,17 +23,7 @@
           "awslogs-stream-prefix": "ecs"
         }
       },
-      "environment": [
-        {
-          "name": "AWS_REGION",
-          "value": "ap-northeast-1"
-        },
-        {
-          "name": "PORT",
-          "value": "80"
-        }
-      ],
-      "command": ["sh", "-c", "python", "main.py"]
+      "command": ["sh", "-c", "python main.py"]
     }
   ],
   "requiresCompatibilities": ["FARGATE"],
