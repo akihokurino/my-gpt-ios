@@ -140,6 +140,11 @@ app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 
 
+@app.route("/", methods=["GET"])
+def healthcheck():
+    return json.dumps("ok", ensure_ascii=False), 200
+
+
 @app.route("/chat/completions", methods=["POST"])
 def chat_completions():
     auth_header = request.headers.get("Authorization")
