@@ -1,0 +1,204 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create ECS
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: my-gpt
+
+  VPCID:
+    Description: target vpc id
+    Type: AWS::EC2::VPC::Id
+
+  PublicSubnetIDs:
+    Description: public subnet ids
+    Type: List<AWS::EC2::Subnet::Id>
+
+  PrivateSubnetIDs:
+    Description: private subnet ids
+    Type: List<AWS::EC2::Subnet::Id>
+
+  ContainerImageName:
+    Description: application container image name
+    Type: String
+    Default: httpd
+
+Resources:
+  # ------------------------------------------------------------#
+  #  ECS Cluster
+  # ------------------------------------------------------------#
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Sub ${ProjectName}
+
+  # ------------------------------------------------------------#
+  #  ALB
+  # ------------------------------------------------------------#
+  ALBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${ProjectName}-api-lb
+      GroupDescription: !Sub ${ProjectName}-api-lb
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      VpcId: !Ref VPCID
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api-lb
+
+  ALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub ${ProjectName}-api
+      Scheme: internet-facing
+      LoadBalancerAttributes: []
+      SecurityGroups:
+        - !Ref ALBSecurityGroup
+      Subnets: !Ref PublicSubnetIDs
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api
+
+  ALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref VPCID
+      Name: !Sub ${ProjectName}-api
+      Protocol: HTTP
+      Port: 80
+      TargetType: ip
+      HealthCheckPath: /
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api
+
+  ALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref ALBTargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref ALB
+      Port: 80
+      Protocol: HTTP
+
+  # ------------------------------------------------------------#
+  #  ECS（API）
+  # ------------------------------------------------------------#
+  ECSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${ProjectName}-api-ecs
+      GroupDescription: !Sub ${ProjectName}-api-ecs
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref ALBSecurityGroup
+      VpcId: !Ref VPCID
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api-ecs
+
+  ECSTaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${ProjectName}-api-ecs-task-execution-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+        - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+        - arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser
+
+  ECSTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${ProjectName}-api-ecs-task-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+
+  ECSLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /ecs/${ProjectName}-api
+
+  ECSTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Sub ${ProjectName}-api
+      Cpu: 256
+      Memory: 512
+      ExecutionRoleArn: !Ref ECSTaskExecutionRole
+      TaskRoleArn: !Ref ECSTaskRole
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ContainerDefinitions:
+        - Name: main
+          Image: !Sub ${ContainerImageName}
+          Cpu: "10"
+          Memory: "500"
+          Essential: true
+          Command: ["sh", "-c", "python", "main.py"]
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref ECSLogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+          PortMappings:
+            - ContainerPort: 80
+              HostPort: 80
+              Protocol: tcp
+          Environment:
+            - Name: AWS_REGION
+              Value: ap-northeast-1
+            - Name: PORT
+              Value: 80
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api
+
+  ECSService:
+    Type: AWS::ECS::Service
+    DependsOn: ALBListener
+    Properties:
+      ServiceName: !Sub ${ProjectName}-api
+      Cluster: !Ref ProjectName
+      DesiredCount: 1
+      LaunchType: FARGATE
+      LoadBalancers:
+        - TargetGroupArn: !Ref ALBTargetGroup
+          ContainerPort: 80
+          ContainerName: main
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups:
+            - !Ref ECSSecurityGroup
+          Subnets: !Ref PrivateSubnetIDs
+      TaskDefinition: !Ref ECSTaskDefinition
+      Tags:
+        - Key: Name
+          Value: !Sub ${ProjectName}-api
+
+Outputs: {}

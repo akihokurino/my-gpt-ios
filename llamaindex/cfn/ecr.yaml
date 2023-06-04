@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Create ECR
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: my-gpt
+
+Resources:
+  # ------------------------------------------------------------#
+  #  ECR
+  # ------------------------------------------------------------#
+  ECRRepo:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub ${ProjectName}
