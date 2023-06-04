@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - $HOME/.aws:/root/.aws
+    working_dir: /app
+    environment:
+      - AWS_REGION=ap-northeast-1
+    ports:
+      - "3000:3000"
+    command: ["python", "main.py"]
