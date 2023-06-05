@@ -158,7 +158,7 @@ Resources:
         - Name: main
           Image: !Sub ${ContainerImageName}
           Cpu: "10"
-          Memory: "500" # TODO: このメモリじゃ全然足りないので、調整すること
+          Memory: "500" # TODO: このメモリじゃ全然足りないので、調整すること（api-definition.json側も）
           Essential: true
           Command: ["sh", "-c", "python main.py"]
           LogConfiguration:
