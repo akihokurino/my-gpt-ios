@@ -135,6 +135,8 @@ Resources:
             Effect: Allow
             Principal:
               Service: ecs-tasks.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
 
   ECSLogGroup:
     Type: AWS::Logs::LogGroup
@@ -146,7 +148,7 @@ Resources:
     Properties:
       Family: !Sub ${ProjectName}-api
       Cpu: 256
-      Memory: 512
+      Memory: 512 # TODO: このメモリじゃ全然足りないので、調整すること
       ExecutionRoleArn: !Ref ECSTaskExecutionRole
       TaskRoleArn: !Ref ECSTaskRole
       NetworkMode: awsvpc
@@ -156,7 +158,7 @@ Resources:
         - Name: main
           Image: !Sub ${ContainerImageName}
           Cpu: "10"
-          Memory: "500"
+          Memory: "500" # TODO: このメモリじゃ全然足りないので、調整すること
           Essential: true
           Command: ["sh", "-c", "python main.py"]
           LogConfiguration:
