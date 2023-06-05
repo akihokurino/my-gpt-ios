@@ -9,3 +9,6 @@ docker push 326914400610.dkr.ecr.ap-northeast-1.amazonaws.com/my-gpt:${VER}
 envsubst < fargate/api-definition.json > fargate/task-definition.json
 
 aws ecs register-task-definition --cli-input-json file://$PWD/fargate/task-definition.json --profile me
+
+# ここでやるのはTask定義のアップロードのみ
+# 実行後に手動でFargateのTaskを更新すること
