@@ -1,7 +1,7 @@
 {
   "family": "my-gpt-api",
   "cpu": "256",
-  "memory": "512",
+  "memory": "2048",
   "executionRoleArn": "arn:aws:iam::326914400610:role/my-gpt-api-ecs-task-execution-role",
   "taskRoleArn": "arn:aws:iam::326914400610:role/my-gpt-api-ecs-task-role",
   "networkMode": "awsvpc",
@@ -10,8 +10,6 @@
     {
       "name": "main",
       "image": "326914400610.dkr.ecr.ap-northeast-1.amazonaws.com/my-gpt:${VER}",
-      "cpu": "10",
-      "memory": "500",
       "essential": true,
       "command": ["sh", "-c", "python main.py"],
       "logConfiguration": {

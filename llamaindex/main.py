@@ -7,7 +7,7 @@ from flask import Flask, request
 import boto3
 from llama_index import SimpleDirectoryReader
 from llama_index import GPTListIndex, GPTVectorStoreIndex
-from llama_index import StorageContext
+from llama_index import StorageContext, load_index_from_storage
 from llama_index import LangchainEmbedding
 from llama_index.storage.docstore import SimpleDocumentStore
 from llama_index.storage.index_store import SimpleIndexStore
@@ -51,6 +51,7 @@ if os.path.exists("./cache"):
     print("create storage context from cache")
     # persist_dirを利用したいため、明示的にstoreを指定することはしない
     storage_context = StorageContext.from_defaults(persist_dir="./cache")
+    list_index = load_index_from_storage(storage_context=storage_context)
 else:
     storage_context = StorageContext.from_defaults(
         docstore=SimpleDocumentStore(),  # テキストデータが保管されている。InMemory
@@ -58,48 +59,48 @@ else:
         index_store=SimpleIndexStore(),  # インデックスに関する情報が保管されている。InMemory
     )
 
-############ ServiceContextの初期化 ############
-# NodeParserの設定
-# NodeParserは、テキストをチャンクに分割してノードを作成する部分を担っている
-node_parser = SimpleNodeParser()
-# Embeddingsの設定
-# テキストを埋め込みベクトルに変換する部分を担っている
-embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
-llama_embed = LangchainEmbedding(embedding, embed_batch_size=1)
-# LLMPredictorの設定
-# テキスト応答（Completion）を得るための言語モデルの部分を担っている
-llm_predictor = LLMPredictor(ChatOpenAI())
-# PromptHelperの設定
-# PromptHelperは、トークン数制限を念頭において、テキストを分割するなどの部分を担っている
-prompt_helper = PromptHelper(
-    max_input_size=4096,  # LLMに入力するトークンの最大サイズ
-    num_output=256,  # LLMから出力するトークンの最大サイズ
-    max_chunk_overlap=20,  # LLMに入力する際のチャンクのオーバーラップの最大サイズ
-)
-# コールバックの設定
-# LlamaIndexの様々な処理のstart, endでコールバックを設定することができる
-# CallbackManagerにCallbackHandlerを設定することで、各CallbackHandlerのon_event_start, on_event_endが発火する
-callback_manager = CallbackManager([])
-# Loggerの設定
-# 主にLLMへのクエリのログを取得するのに使用される
-logger = LlamaLogger()
+    ############ ServiceContextの初期化 ############
+    # NodeParserの設定
+    # NodeParserは、テキストをチャンクに分割してノードを作成する部分を担っている
+    node_parser = SimpleNodeParser()
+    # Embeddingsの設定
+    # テキストを埋め込みベクトルに変換する部分を担っている
+    embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
+    llama_embed = LangchainEmbedding(embedding, embed_batch_size=1)
+    # LLMPredictorの設定
+    # テキスト応答（Completion）を得るための言語モデルの部分を担っている
+    llm_predictor = LLMPredictor(ChatOpenAI())
+    # PromptHelperの設定
+    # PromptHelperは、トークン数制限を念頭において、テキストを分割するなどの部分を担っている
+    prompt_helper = PromptHelper(
+        max_input_size=4096,  # LLMに入力するトークンの最大サイズ
+        num_output=256,  # LLMから出力するトークンの最大サイズ
+        max_chunk_overlap=20,  # LLMに入力する際のチャンクのオーバーラップの最大サイズ
+    )
+    # コールバックの設定
+    # LlamaIndexの様々な処理のstart, endでコールバックを設定することができる
+    # CallbackManagerにCallbackHandlerを設定することで、各CallbackHandlerのon_event_start, on_event_endが発火する
+    callback_manager = CallbackManager([])
+    # Loggerの設定
+    # 主にLLMへのクエリのログを取得するのに使用される
+    logger = LlamaLogger()
 
-service_context = ServiceContext.from_defaults(
-    node_parser=node_parser,
-    embed_model=llama_embed,
-    llm_predictor=llm_predictor,
-    prompt_helper=prompt_helper,
-    llama_logger=logger,
-    callback_manager=callback_manager,
-)
+    service_context = ServiceContext.from_defaults(
+        node_parser=node_parser,
+        embed_model=llama_embed,
+        llm_predictor=llm_predictor,
+        prompt_helper=prompt_helper,
+        llama_logger=logger,
+        callback_manager=callback_manager,
+    )
 
-############ Indexの初期化 ############
-documents = SimpleDirectoryReader(input_dir="./data").load_data()
-list_index = GPTVectorStoreIndex.from_documents(
-    documents, storage_context=storage_context, service_context=service_context
-)
-# 生成したIndexを保存する
-list_index.storage_context.persist("./cache")
+    ############ Indexの初期化 ############
+    documents = SimpleDirectoryReader(input_dir="./data").load_data()
+    list_index = GPTVectorStoreIndex.from_documents(
+        documents, storage_context=storage_context, service_context=service_context
+    )
+    # 生成したIndexを保存する
+    list_index.storage_context.persist("./cache")
 
 ############ QueryEngineの初期化 ############
 # GPTVectorStoreIndexを利用しているのでRetrieverModeとしては「埋め込みベクトルを使って抽出」
