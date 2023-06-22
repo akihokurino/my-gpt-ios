@@ -69,7 +69,7 @@ else:
     llama_embed = LangchainEmbedding(embedding, embed_batch_size=1)
     # LLMPredictorの設定
     # テキスト応答（Completion）を得るための言語モデルの部分を担っている
-    llm_predictor = LLMPredictor(ChatOpenAI())
+    llm_predictor = LLMPredictor(llm=ChatOpenAI())
     # PromptHelperの設定
     # PromptHelperは、トークン数制限を念頭において、テキストを分割するなどの部分を担っている
     prompt_helper = PromptHelper(
@@ -126,6 +126,7 @@ MY_REFINE_PROMPT_TMPL = (
     "コンテキストが役に立たない場合は、元の回答を返してください。"
 )
 
+llm_predictor = LLMPredictor(llm=ChatOpenAI())
 query_engine = list_index.as_query_engine(
     node_postprocessors=[],  # Node抽出後の後処理
     optimizer=None,  # 各Nodeのテキストに適用したい後処理
@@ -134,6 +135,7 @@ query_engine = list_index.as_query_engine(
     text_qa_template=QuestionAnswerPrompt(MY_TEXT_QA_PROMPT_TMPL),
     refine_template=RefinePrompt(MY_REFINE_PROMPT_TMPL),
     simple_template=SimpleInputPrompt(DEFAULT_SIMPLE_INPUT_TMPL),
+    service_context=(ServiceContext.from_defaults(llm_predictor=llm_predictor)),
 )
 
 ############ Flaskの初期化 ############
